@@ -42,3 +42,28 @@ func (l *LinkedList) RemoveNodeByValue(value int) error {
 
 	return nil
 }
+
+func (l *LinkedList) RemoveNodeByPosition(position int) error {
+	if l.Size == 0 {
+		return errors.New("list is empty")
+	}
+
+	if position == 0 {
+		l.Head = l.Head.Next
+		l.Size--
+		return nil
+	}
+
+	current := l.Head
+
+	for i := 0; i < position-1; i++ {
+		if current.Next != nil {
+			current = current.Next
+		}
+	}
+
+	current.Next = current.Next.Next
+	l.Size--
+
+	return nil
+}

@@ -27,7 +27,7 @@ func TestAppeding(t *testing.T) {
 			list.Append(value)
 		}
 
-		assert.Equal(t, list.Size, len(test.nodes))
+		assert.Equal(t, len(test.nodes), list.Size)
 	}
 }
 
@@ -71,6 +71,51 @@ func TestRemovingNodeByValue(t *testing.T) {
 			}
 		}
 
-		assert.Equal(t, list.Size, test.expected)
+		assert.Equal(t, test.expected, list.Size)
+	}
+}
+
+func TestRemovingNodeByPosition(t *testing.T) {
+	tests := []struct {
+		nodes             []int
+		positionsToRemove []int
+		expected          int
+	}{
+		{
+			[]int{0, 17},
+			[]int{0, 0},
+			0,
+		},
+		{
+			[]int{},
+			[]int{},
+			0,
+		},
+		{
+			[]int{-3, -1, 0, 1},
+			[]int{0, 2},
+			2,
+		},
+		{
+			[]int{-3, -1, 0, 0, 1},
+			[]int{4, 3, 2, 1, 0},
+			0,
+		},
+	}
+
+	for _, test := range tests {
+		var list LinkedList
+
+		for _, value := range test.nodes {
+			list.Append(value)
+		}
+
+		for _, position := range test.positionsToRemove {
+			if err := list.RemoveNodeByPosition(position); err != nil {
+				log.Println(err)
+			}
+		}
+
+		assert.Equal(t, test.expected, list.Size)
 	}
 }
