@@ -1,6 +1,8 @@
 package linkedList
 
-import "errors"
+import (
+	"errors"
+)
 
 func (l *LinkedList) Append(value int) {
 	newNode := &Node{Value: value, Next: nil}
@@ -66,4 +68,21 @@ func (l *LinkedList) RemoveNodeByPosition(position int) error {
 	l.Size--
 
 	return nil
+}
+
+func (l *LinkedList) FindMiddleNode() (*Node, error) {
+
+	if l.Head == nil {
+		return nil, errors.New("list is empty")
+	}
+
+	slow := l.Head
+	fast := l.Head
+
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	return slow, nil
 }

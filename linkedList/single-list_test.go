@@ -119,3 +119,38 @@ func TestRemovingNodeByPosition(t *testing.T) {
 		assert.Equal(t, test.expected, list.Size)
 	}
 }
+
+func TestFindMiddleNode(t *testing.T) {
+	tests := []struct {
+		nodes    []int
+		expected int
+	}{
+		{
+			[]int{0, 17, 9},
+			17,
+		},
+		{
+			[]int{-3, -1, 0, 1},
+			0,
+		},
+		{
+			[]int{-3, -1, 0, 0, 1},
+			0,
+		},
+	}
+
+	for _, test := range tests {
+		var list LinkedList
+
+		for _, value := range test.nodes {
+			list.Append(value)
+		}
+
+		middleNode, err := list.FindMiddleNode()
+		if err != nil {
+			log.Print(err)
+		}
+
+		assert.Equal(t, test.expected, middleNode.Value)
+	}
+}
