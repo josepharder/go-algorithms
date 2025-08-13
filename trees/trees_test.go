@@ -43,7 +43,6 @@ func TestTrees(t *testing.T) {
 	fmt.Println("Leaves of a tree", GetLeaves(company))
 
 	// Path of a tree
-
 	fmt.Println("Path to senior QA", GetPath(company, "senior qa"))
 
 	// Depth first traversal

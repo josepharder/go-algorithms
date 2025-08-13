@@ -52,7 +52,7 @@ func (t *Trie) Search(word string) bool {
 	return current.IsEnd
 }
 
-func findLongestCommonPrefix(words []string) string {
+func FindLongestCommonPrefix(words []string) string {
 	trie := NewTrie()
 
 	for _, word := range words {

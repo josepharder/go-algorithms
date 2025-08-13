@@ -1,4 +1,4 @@
-package linkedList
+package list
 
 import (
 	"log"
@@ -153,4 +153,10 @@ func TestFindMiddleNode(t *testing.T) {
 
 		assert.Equal(t, test.expected, middleNode.Value)
 	}
+}
+
+func TestMerging(t *testing.T) {
+
+	p()
+
 }

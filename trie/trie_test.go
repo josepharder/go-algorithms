@@ -7,7 +7,7 @@ import (
 )
 
 func TestTrieStructure(t *testing.T) {
-	prefix := findLongestCommonPrefix([]string{"fa", "fe"})
+	prefix := FindLongestCommonPrefix([]string{"fa", "fe"})
 
 	assert.Equal(t, "f", prefix)
 }
