@@ -1,4 +1,4 @@
-package sorting
+package sort
 
 import (
 	"testing"
@@ -29,8 +29,24 @@ func TestMergeSort(t *testing.T) {
 	}
 }
 
+func TestInsertionSort(t *testing.T) {
+	tests := GenerateTests()
+
+	for _, test := range tests {
+		assert.Equal(t, test.Expected, InsertionSort(test.Arr))
+	}
+}
+
 func GenerateTests() []Test {
 	return []Test{
+		{
+			Arr:      []int{9, 5, 3, 7},
+			Expected: []int{3, 5, 7, 9},
+		},
+		{
+			Arr:      []int{5, 4, 6, 3, 7, 1},
+			Expected: []int{1, 3, 4, 5, 6, 7},
+		},
 		{
 			Arr:      []int{9, 8, 3, 4, 0, 1, 4, 13},
 			Expected: []int{0, 1, 3, 4, 4, 8, 9, 13},
