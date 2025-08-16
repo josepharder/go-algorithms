@@ -1,26 +1,23 @@
 package sort
 
-func QuickSort(arr []int, start, end int) []int {
-	if len(arr) == 3 {
-		return InsertionSort(arr)
+func QuickSort(arr []int, start, end int) {
+	if end-start+1 <= 3 {
+		InsertionSort(arr, start, end)
 	} else {
 		pivot := partision(arr, start, end)
-		arr = QuickSort(arr, start, pivot-1)
-		arr = QuickSort(arr, pivot+1, end)
+		QuickSort(arr, start, pivot-1)
+		QuickSort(arr, pivot+1, end)
 	}
-
-	return arr
 }
 
 func partision(arr []int, start, end int) int {
-
-	middle := getMidPoint(arr, start, end)
+	middle := start + getMidPoint(start, end)
 	sortFirstMidLast(arr, start, middle, end)
 
-	arr[len(arr)-2], arr[middle] = arr[middle], arr[len(arr)-2] // swap middle to a safe spot position
+	arr[end-1], arr[middle] = arr[middle], arr[end-1] // swap middle to a safe spot position
 
-	pivotIndex := len(arr) - 2
-	pivotValue := arr[len(arr)-2]
+	pivotIndex := end - 1
+	pivotValue := arr[end-1]
 
 	fromLeft := start + 1
 	fromRight := end - 2
@@ -50,24 +47,18 @@ func partision(arr []int, start, end int) int {
 
 }
 
-func getMidPoint(arr []int, start, end int) int {
-	return len(arr[start:end]) / 2
+func getMidPoint(start, end int) int {
+	return (end - start) / 2
 }
 
 func sortFirstMidLast(arr []int, start, middle, end int) {
-	smallest, mid, largest := arr[start], arr[middle], arr[end]
-
-	if smallest > mid {
-		mid, smallest = smallest, mid
-	} else {
-		smallest, mid = mid, smallest
+	if arr[start] > arr[middle] {
+		arr[start], arr[middle] = arr[middle], arr[start]
 	}
-
-	if mid > largest {
-		mid, largest = largest, mid
-	} else {
-		largest, mid = mid, largest
+	if arr[start] > arr[end] {
+		arr[start], arr[end] = arr[end], arr[start]
 	}
-
-	arr[start], arr[middle], arr[end] = smallest, mid, largest
+	if arr[middle] > arr[end] {
+		arr[middle], arr[end] = arr[end], arr[middle]
+	}
 }
